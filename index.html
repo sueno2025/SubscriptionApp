@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>サブスク管理アプリ</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/main.js"></script>
+</head>
+<body>
+    <h1>サブスク管理アプリ</h1>
+	<h3>現在、加入してるサービスを入力してください</h3>
+	<form >
+		サービス名：<input type="text" id="service" required><br>
+		利用料金：<input type="number" min="0" step="10" id="price" required><br>
+		契約タイプ：<select id="payType" required>
+			<option value="月額">月額</option>
+			<option value="年額">年額</option>
+		</select><br>
+		 利用頻度：<input type="number" min="0" max="10"
+			id="useFrequency" required><br>
+		非表示設定：<input type="checkbox" id="isHide" value="yas">
+		解約不可：<input type="checkbox" id="canNotCancel" value="yes"><br>
+		<button type="submit" id="addItem">登録</button>
+	</form>
+</body>
+</html>
