@@ -20,23 +20,36 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(table);
 
     const displayList = () => {
-        //見出し行
+        //adminからのページ遷移後のデータ取得
+        const editedItem = JSON.parse(localStorage.getItem("editedItem"));
+        //nullチェック
+        const editedIndex = editedItem ? parseInt(editedItem.index) : NaN;
+        //変更したcolmunがあった場合
+        if (editedItem && !isNaN(editedIndex)) {
+            list[editedIndex] = editedItem;
+            saveToLocalStorage();
+            localStorage.removeItem("editedItem");
+
+        }
+        //テーブルの初期化、見出し行作成
         table.innerHTML = "";
         const thead = document.createElement("thead");
         thead.innerHTML = `
-            <tr>
-                <th>サービス名</th>
-                <th>料金</th>
-                <th>支払いタイプ</th>
-                <th>利用頻度</th>
-                <th colspan=2>更新</th>
-            </tr> 
-    
-    `;
+        <tr>
+        <th>サービス名</th>
+        <th>料金</th>
+        <th>支払いタイプ</th>
+        <th>利用頻度</th>
+        <th colspan=2>更新</th>
+        </tr> 
+        
+        `;
         table.appendChild(thead);
 
 
         const tbody = document.createElement("tbody");
+        // 使用頻度の高い順にソート
+        list.sort((a, b) => b.useFrequency - a.useFrequency);
         list.forEach((item, index) => {
             const tr = document.createElement("tr");
             tr.dataset.index = index;
@@ -48,25 +61,30 @@ document.addEventListener('DOMContentLoaded', () => {
             <td>${item.useFrequency}</td>  
             <td>${item.canNotCancel ? "" : `<button class="delete-btn">削除</button>`}
             </td>  
-            <td><button class="update-btn">変更</td>  
-        `
+            <td><button class="update-btn">変更</button></td>  
+            `
             //削除ボタン機能
             if (!item.canNotCancel) {
-                tr.querySelector(".delete-btn").addEventListener("click", () => {
-                    list.splice(index, 1);
-                    saveToLocalStorage();
-                    displayList();
+                tr.querySelector(".delete-btn")?.addEventListener("click", () => {
+                    //alert表示
+                    const confirmed = confirm("この項目を削除してもよろしいですか？");
+                    if (confirmed) {
+                        list.splice(index, 1);
+                        saveToLocalStorage();
+                        displayList();
+                    }
                 })
             };
             tbody.appendChild(tr);
             //更新ボタンでのページ遷移
-            tr.querySelector(".update-btn").addEventListener("click", () => {
+            tr.querySelector(".update-btn")?.addEventListener("click", () => {
                 const itemData = list[index];
-                localStorage.setItem("editTarget",JSON.stringify(itemData));
-                localStorage.setItem("editIndex",index);
+                localStorage.setItem("editTarget", JSON.stringify(itemData));
+                localStorage.setItem("editIndex", index);
                 window.location.href = "admin.html";
             });
         });
+
         table.appendChild(tbody);
 
     };
@@ -90,8 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
         //ここは通らない？
         if (isNaN(parseInt(priceVal))) {
             alert("価格はは半角の数字で入力してください");
+            return;
         } if (isNaN(parseInt(freqVal))) {
             alert("利用頻度は半角の数字で入力してください");
+            return;
         }
         //入力値を元にオブジェクトを作成
         const item = {
