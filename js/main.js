@@ -138,4 +138,42 @@ document.addEventListener('DOMContentLoaded', () => {
     //初回リスト表示
     displayList();
 
+    //合計金額の表示
+    const monthly = Math.round(calcMonth(list));
+    const yearly = calcYear(list);
+    const result = document.createElement("div");
+    result.innerHTML = `
+    <h5>現在の加入状況</h5>
+    <p>毎月の支払額 : ${monthly}円</p>
+    <p>年間の支払額: ${yearly}円</p>
+    `;
+    document.body.appendChild(result);
+
+
+    //合計月額の計算関数
+    function calcMonth(list) {
+        let sum = 0;
+        for (let i = 0; i < list.length; i++) {
+            if(list[i].payType == "月額"){
+                sum += list[i].price;
+            }else{
+                sum += list[i].price / 12;
+            }
+        }
+        return sum;
+
+    }
+    //合計年額の計算関数
+    function calcYear(list){
+        let sum = 0;
+        for(let i = 0; i < list.length;i++){
+            if(list[i].payType == "年額"){
+                sum += list[i].price;
+            }else{
+                sum += list[i].price * 12;
+            }
+        }
+        return sum;
+    }
+
 });
