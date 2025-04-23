@@ -10,40 +10,69 @@ document.addEventListener('DOMContentLoaded', () => {
     const canNotCancel = document.querySelector("#canNotCancel")
     const bt = document.querySelector("#addItem");
 
-
-    //リストの作成
-    const ul = document.createElement("ul");
-    ul.id = "subscriptionList";
-    document.body.appendChild(ul);
     //ローカルストレージからデータ取得
     let list = JSON.parse(localStorage.getItem('subscriptionList')) || [];
+
+    //リストの作成
+    const table = document.createElement("table");
+    table.id = "subscriptionTable";
+    table.border = "1";  //cssを追加したら消す
+    document.body.appendChild(table);
+
+    const displayList = () => {
+        //見出し行
+        table.innerHTML = "";
+        const thead = document.createElement("thead");
+        thead.innerHTML = `
+            <tr>
+                <th>サービス名</th>
+                <th>料金</th>
+                <th>支払いタイプ</th>
+                <th>利用頻度</th>
+                <th colspan=2>更新</th>
+            </tr> 
+    
+    `;
+        table.appendChild(thead);
+
+
+        const tbody = document.createElement("tbody");
+        list.forEach((item, index) => {
+            const tr = document.createElement("tr");
+            tr.dataset.index = index;
+
+            tr.innerHTML = `
+            <td>${item.isHide ? "secret" : item.service}</td>  
+            <td>${item.price}円</td>  
+            <td>${item.payType}</td>  
+            <td>${item.useFrequency}</td>  
+            <td>${item.canNotCancel ? "" : `<button class="delete-btn">削除</button>`}
+            </td>  
+            <td><button class="update-btn">変更</td>  
+        `
+            //削除ボタン機能
+            if (!item.canNotCancel) {
+                tr.querySelector(".delete-btn").addEventListener("click", () => {
+                    list.splice(index, 1);
+                    saveToLocalStorage();
+                    displayList();
+                })
+            };
+            tbody.appendChild(tr);
+            //更新ボタンでのページ遷移
+            tr.querySelector(".update-btn").addEventListener("click", () => {
+                window.location.href = "admin.html";
+            })
+        });
+        table.appendChild(tbody);
+
+    };
 
     //ローカルストレージに保存
     const saveToLocalStorage = () => {
         localStorage.setItem("subscriptionList", JSON.stringify(list));
-    }
-    //リストを画面に表示する関数
-    const displayList = () => {
-        //ulの中身を空文字に
-        ul.innerHTML = "";
-        list.forEach((item, index) => {
-            const li = document.createElement("li");
-            li.dataset.index = index;
-
-            const info = `${item.isHide ? "非表示" : ""}${item.service}:${item.price}円|${item.payType}|利用頻度${item.canNotCancel ? "|解約不可" : ""}`;
-            li.textContent = info;
-
-            const delBtn = document.createElement("button");
-            delBtn.textContent = "削除";
-            delBtn.addEventListener("click", () => {
-                list.splice(index, 1);
-                saveToLocalStorage();
-                displayList();
-            });
-            li.appendChild(delBtn);
-            ul.appendChild(li);
-        });
     };
+
     //「追加」ボタンのクリックイベント
     bt.addEventListener('click', (e) => {
         e.preventDefault();
