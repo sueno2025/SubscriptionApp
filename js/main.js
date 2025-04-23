@@ -61,8 +61,11 @@ document.addEventListener('DOMContentLoaded', () => {
             tbody.appendChild(tr);
             //更新ボタンでのページ遷移
             tr.querySelector(".update-btn").addEventListener("click", () => {
+                const itemData = list[index];
+                localStorage.setItem("editTarget",JSON.stringify(itemData));
+                localStorage.setItem("editIndex",index);
                 window.location.href = "admin.html";
-            })
+            });
         });
         table.appendChild(tbody);
 

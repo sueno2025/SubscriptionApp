@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/admin.js"></script>
+    <title>更新ページ</title>
+</head>
+
+<body>
+    <h3>項目を変更してください</h3>
+    <form>
+        サービス名:<input type="text" id="service" required><br>
+        利用料金:<input type="number" id="price" min="0" step="10" required><br>
+        契約タイプ:<select id="payType" required>
+            <option value="月額">月額</option>
+            <option value="年額">年額</option>
+        </select>
+        利用頻度:<input type="number" id="useFrequency" max="10" min="1" required><br>
+        非表示設定:<input type="checkbox" id="isHide" value="yes">
+        解約不可:<input type="checkbox" id="canNotCancel" value="yes">
+        <button type="submit" id="updateItem">変更</button>
+    </form>
+
+</body>
+
+</html>
