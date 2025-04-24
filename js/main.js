@@ -148,15 +148,37 @@ document.addEventListener('DOMContentLoaded', () => {
     <p>年間の支払額: ${yearly}円</p>
     `;
     document.body.appendChild(result);
+    //これは後半に配置する
+    //利用頻度３以上のアイテムだけ残したリスト
+    const filteredList = list.filter(item => item.useFrequency > 3 || item.canNotCancel);
+    //金額の算出
+    const monthlyCurrent = Math.round(calcMonth(list));
+    const yearlyCurrent = calcYear(list);
+    const monthlyFiltered = Math.round(calcMonth(list));
+    const yearlyFiltered = calcYear(list);
+    //差額の算出
+    const monthlyDiff = monthlyCurrent - monthlyFiltered;
+    const yearlyDiff = yearlyCurrent - yearlyFiltered;
+
+    //表示部分
+    const savingMessage = document.createElement("div");
+    savingMessage.innerHTML = `
+            <h5>もし利用頻度が3以下のサービスを解約したら...?</h5>
+            <p>一ヶ月あたり<strong>${monthlyDiff}円</strong>の節約になります</p>
+            <p>年間の節約額は<strong>${yearlyDiff}円</strong>です</p>
+        `;
+    document.body.appendChild(savingMessage)
+
+
 
 
     //合計月額の計算関数
     function calcMonth(list) {
         let sum = 0;
         for (let i = 0; i < list.length; i++) {
-            if(list[i].payType == "月額"){
+            if (list[i].payType == "月額") {
                 sum += list[i].price;
-            }else{
+            } else {
                 sum += list[i].price / 12;
             }
         }
@@ -164,16 +186,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
     //合計年額の計算関数
-    function calcYear(list){
+    function calcYear(list) {
         let sum = 0;
-        for(let i = 0; i < list.length;i++){
-            if(list[i].payType == "年額"){
+        for (let i = 0; i < list.length; i++) {
+            if (list[i].payType == "年額") {
                 sum += list[i].price;
-            }else{
+            } else {
                 sum += list[i].price * 12;
             }
         }
         return sum;
     }
+
 
 });
