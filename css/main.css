@@ -1,72 +1,95 @@
-/* main.css */
+/* 基本のリセットがある前提 */
 
-/* ベースのフォントと色 */
+/* 全体 */
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
+    font-family: sans-serif;
     margin: 0;
-    padding: 0;
-}
-
-/* フォームのスタイル */
-form {
-    width: 80%;
-    max-width: 600px;
-    margin: 20px auto;
+    padding: 1rem;
+    background-color: #f5f5f5;
+    color: #333;
+  }
+  
+  /* タイトル */
+  h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+  
+  h3 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  /* フォーム */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 500px;
+    margin: 0 auto 2rem auto;
+    padding: 1rem;
     background-color: #fff;
-    padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-input, select, button {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    font-size: 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  }
+  
+  input, select, button {
+    font-size: 1rem;
+    padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 4px;
-}
-
-button {
-    background-color: #4CAF50;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  /* ボタン */
+  button {
+    background-color: #0077cc;
     color: white;
+    font-weight: bold;
     cursor: pointer;
-    border: none;
-}
-
-button:hover {
-    background-color: #45a049;
-}
-
-/* テーブルのスタイル */
-table {
-    width: 90%;
-    margin: 20px auto;
+    transition: background-color 0.2s ease;
+  }
+  button:hover {
+    background-color: #005fa3;
+  }
+  
+  /* テーブル */
+  .table-container {
+    overflow-x: auto;
+    margin: 0 auto;
+    max-width: 100%;
+  }
+  
+  table {
+    width: 100%;
     border-collapse: collapse;
-}
-
-th, td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-th {
-    background-color: #4CAF50;
+    margin-bottom: 2rem;
+    background-color: white;
+  }
+  
+  th, td {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    text-align: center;
+  }
+  
+  th {
+    background-color: #0077cc;
     color: white;
-}
-
-/* レスポンシブ対応 */
-@media (max-width: 768px) {
-    form {
-        width: 90%;
+  }
+  
+  /* レスポンシブ対応 */
+  @media screen and (max-width: 480px) {
+    h1 {
+      font-size: 1.2rem;
     }
-    table {
-        width: 100%;
+    h3 {
+      font-size: 0.95rem;
     }
     input, select, button {
-        width: 100%;
+      font-size: 0.95rem;
     }
-}
+  }

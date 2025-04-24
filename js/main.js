@@ -12,12 +12,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //ローカルストレージからデータ取得
     let list = JSON.parse(localStorage.getItem('subscriptionList')) || [];
-
+    const container = document.createElement("div");
+    container.className = "table-container";
+    document.body.appendChild(container);
     //リストの作成
     const table = document.createElement("table");
     table.id = "subscriptionTable";
-    table.border = "1";  //cssを追加したら消す
-    document.body.appendChild(table);
+    //table.border = "1";  //cssを追加したら消す
+    container.appendChild(table);
+    
+
 
     const displayList = () => {
         //adminからのページ遷移後のデータ取得
