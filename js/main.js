@@ -40,10 +40,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const thead = document.createElement("thead");
         thead.innerHTML = `
         <tr>
-        <th>サービス名</th>
+        <th>サービス</th>
         <th>料金</th>
-        <th>支払いタイプ</th>
-        <th>利用頻度</th>
+        <th>支払</th>
+        <th>頻度</th>
         <th colspan=2>更新</th>
         </tr> 
         
