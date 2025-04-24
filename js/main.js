@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <tr>
         <th>サービス名</th>
         <th>料金</th>
-        <th>支払いタイプ</th>
+        <th>タイプ</th>
         <th>利用頻度</th>
         <th colspan=2>更新</th>
         </tr> 
