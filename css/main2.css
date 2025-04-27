@@ -1,0 +1,159 @@
+/* テーブルは白、グレー系にする */
+
+body {
+    font-family: "Arial", sans-serif;
+    background-color: #80d7ff; /* 優しいピンク */
+    color: #333;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    
+}
+
+h1 {
+    color: #4089ff; /* ビビッドピンク */
+    font-size: 28px;
+    margin-top: 20px;
+}
+
+h3 {
+    color: #4089ff;
+}
+
+form {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+input, select {
+    width: 90%;
+    padding: 8px;
+    margin: 8px 0;
+    border: 2px solid #80d7ff;
+    border-radius: 5px;
+    outline: none;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #555;
+    border-radius: 4px;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+input[type="checkbox"]::before {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color:#ff4081;
+    border-radius: 2px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.2s ease-in-out;
+}
+
+input[type="checkbox"]:checked::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+button {
+    background-color: #fffc32;
+    color: rgb(28, 16, 2);
+    border: solid 1px #cec400;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #ffd700;
+}
+
+table {
+    width: 80%;
+    margin: 20px auto;
+    /* border-collapse: collapse; */
+    background: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    border: 2px solid #2e27b8;;
+    text-align: center;
+}
+
+th {
+    background-color: #ff969b;;
+    color: white;
+}
+tr:nth-child(odd){
+    background-color:#fff;
+}
+tr:nth-child(even) {
+    background-color: #e6fffa;
+}
+
+tr:hover {
+    background-color: #97ddfd;
+}
+
+/* スマホ画面に収めるための工夫 */
+@media (max-width: 600px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  th, td {
+    font-size: 14px;
+    padding: 6px;
+  }
+}
+
+/* 入力フォームやボタンもスマホ対応 */
+input, button {
+  font-size: 16px;
+  padding: 8px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 400px;
+}
+@media (max-width: 480px) {
+    table {
+      width: 100%;
+      table-layout: fixed;
+      border-collapse: collapse;
+    }
+  
+    th, td {
+      font-size: 12px; /* さらに小さめに */
+      padding: 4px; /* 余白も縮める */
+      word-break: break-word; /* 長い文字も折り返す */
+    }
+  
+    input, button {
+      font-size: 14px;
+      padding: 6px;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+  }

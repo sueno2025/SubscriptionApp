@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>サブスク管理アプリ</title>
 	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css">
-    <link rel="stylesheet" href="css/main.css?v=20250424">
+    <link rel="stylesheet" href="css/main2.css">
     <script src="js/main.js"></script>
 </head>
 
@@ -15,20 +15,21 @@
 	<h3>現在、加入してるサービスを入力してください</h3>
 	<form>
 		<div class="form-row">
-		  サービス名：<input type="text" id="service" required>
+		  <div class="service">サービス名：<input type="text" id="service" required></div>
 		</div>
 		<div class="form-row">
-		  利用料金：<input type="number" id="price" required>
+		 <div class="price"> 利用料金：<input type="number" id="price" min="0"required></div>
 		  契約タイプ：
-		  <select id="payType" required>
+		  <div class="payType"><select id="payType" required>
 			<option value="月額">月額</option>
 			<option value="年額">年額</option>
 		  </select>
+		  </div>
 		</div>
 		<div class="form-row">
-		  利用頻度：<input type="number" id="useFrequency" required>
-		  非表示設定：<input type="checkbox" id="isHide">
-		  解約不可：<input type="checkbox" id="canNotCancel">
+		  <div class="useFrequency">利用頻度：<input type="number" min="1" max="10"id="useFrequency" required></div>
+		  <div class="isHide">非表示設定：<input type="checkbox" id="isHide"></div>
+		  <div class="canNotCancel">解約不可：<input type="checkbox" id="canNotCancel"></div>
 		</div>
 		<button type="submit" id="addItem">登録</button>
 	  </form>
