@@ -18,11 +18,12 @@
         契約タイプ:<select id="payType" required>
             <option value="月額">月額</option>
             <option value="年額">年額</option>
-        </select>
+        </select><br>
         利用頻度:<input type="number" id="useFrequency" max="10" min="1" required><br>
         非表示設定:<input type="checkbox" id="isHide" value="yes">
         解約不可:<input type="checkbox" id="canNotCancel" value="yes">
-        <button type="submit" id="updateItem">変更</button>
+        <input type="hidden" id="itemId">
+        <button type="button" id="updateItem">変更</button>
     </form>
 
 </body>

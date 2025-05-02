@@ -2,6 +2,7 @@
 //HTMLのすべての要素を読み込んだあとに実行(null防止)
 document.addEventListener('DOMContentLoaded', () => {
     //DOMの取得
+
     const service = document.querySelector("#service");
     const price = document.querySelector("#price");
     const payType = document.querySelector("#payType");
@@ -20,20 +21,21 @@ document.addEventListener('DOMContentLoaded', () => {
     table.id = "subscriptionTable";
     //table.border = "1";  //cssを追加したら消す
     container.appendChild(table);
-    
+
 
 
     const displayList = () => {
         //adminからのページ遷移後のデータ取得
         const editedItem = JSON.parse(localStorage.getItem("editedItem"));
         //nullチェック
-        const editedIndex = editedItem ? parseInt(editedItem.index) : NaN;
-        //変更したcolmunがあった場合
-        if (editedItem && !isNaN(editedIndex)) {
-            list[editedIndex] = editedItem;
-            saveToLocalStorage();
+        if (editedItem) {
+            const index = list.findIndex(item => item.id === editedItem.id);
+            //変更したcolmunがあった場合
+            if (index !== -1) {
+                list[index] = editedItem;
+                saveToLocalStorage();
+            }
             localStorage.removeItem("editedItem");
-
         }
         //テーブルの初期化、見出し行作成
         table.innerHTML = "";
@@ -117,8 +119,14 @@ document.addEventListener('DOMContentLoaded', () => {
             alert("利用頻度は半角の数字で入力してください");
             return;
         }
+        if (freqVal < 1 || freqVal > 10) {
+            alert("利用頻度は1〜10の範囲で入力してください");
+            return;
+        }
+    
         //入力値を元にオブジェクトを作成
         const item = {
+            id:Date.now(),
             service: service.value.trim(),
             price: parseInt(price.value),
             payType: payType.value,
@@ -158,8 +166,8 @@ document.addEventListener('DOMContentLoaded', () => {
     //金額の算出
     const monthlyCurrent = Math.round(calcMonth(list));
     const yearlyCurrent = calcYear(list);
-    const monthlyFiltered = Math.round(calcMonth(list));
-    const yearlyFiltered = calcYear(list);
+    const monthlyFiltered = Math.round(calcMonth(filteredList));
+    const yearlyFiltered = calcYear(filteredList);
     //差額の算出
     const monthlyDiff = monthlyCurrent - monthlyFiltered;
     const yearlyDiff = yearlyCurrent - yearlyFiltered;
